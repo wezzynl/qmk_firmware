@@ -15,4 +15,7 @@
 #define TAPPING_TERM 200
 #define COMBO_TERM 8
 
+// Set Combined mode for mouse keys
+#define MK_COMBINED
+
 #endif

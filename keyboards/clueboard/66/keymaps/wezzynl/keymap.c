@@ -14,12 +14,22 @@
 #define _PL 3 // Programming layer
 #define _SD 4 // SuperDuper layer
 #define _CTL 5 // Control Tab layer
-#define _GL 6 // GOD layer should always be at top so we're always able to switch to it.
+#define _ML 6 // Mouse layer
+#define _GL 7 // GOD layer should always be at top so we're always able to switch to it.
 
 // These are called with `FUNC(x)` where `x` is the index.
 const uint16_t PROGMEM fn_actions[] = {
   [0] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESCAPE),
 };
+
+
+/* Empty map
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______,          _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______,                   _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______,                            \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______,                   \
+  _______, _______, _______, _______,          _______, _______,                   _______, _______,  _______,  _______, _______, _______, _______,
+*/
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Keymap _BL: Base Layer (Default Layer)
@@ -29,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_TAB,   KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,    KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,                   KC_PGDOWN, \
                  FUNC(0),  KC_A,   KC_S,   KC_D,   KC_F,           KC_G,   KC_H,   KC_J,   KC_K,   KC_L,    KC_SCLN,  KC_QUOT,  KC_NUHS,  KC_ENT, \
                  KC_LSFT, KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,           KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,   KC_SLSH,  KC_RSFT,  MO(_FL),          KC_UP,            \
-                 MO(_PL), MO(_GL), KC_LALT,KC_LGUI,        KC_ENT, KC_SPC,                         MO(_FL), KC_RGUI,  MO(_PL), KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT),
+                 TT(_ML), MO(_GL), KC_LALT,KC_LGUI,        KC_ENT, KC_SPC,                         TT(_ML), KC_RGUI,  MO(_FL), KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT),
 
   /* Keymap _FL: Function Layer
    */
@@ -73,6 +83,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_LSFT, KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,           KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,   KC_SLSH,  KC_RSFT,  MO(_FL),          KC_UP,            \
                  MO(_PL), MO(_GL), KC_LCTL,KC_LGUI,        KC_ENT, KC_SPC,                         MO(_FL), KC_RGUI,  MO(_PL), KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT),
 
+  // Mouse layer
+  [_ML] = KEYMAP(
+                 _______, _______, _______, _______, _______, _______, _______,    _______,    _______,  _______, _______,  _______,  _______, _______, _______,          _______, \
+                 _______, _______, _______, _______, _______, _______, _______,    _______,    _______,  _______, _______,  _______,  _______, _______,                   _______, \
+                 _______, KC_MS_BTN2, _______, KC_MS_BTN2, KC_MS_BTN1, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_UP, KC_MS_RIGHT, _______,  _______,  _______, _______,                            \
+                 _______, _______, _______, _______, _______, _______, _______,    _______,    _______,  _______, _______,  _______,  _______, _______, _______,                   \
+                 _______, _______, _______, KC_MS_ACCEL0,          KC_MS_ACCEL2, _______,                          _______, _______,  _______,  _______, _______, _______, _______),
   // GOD layer
   [_GL] = KEYMAP(
                  xxxxxxx,       xxxxxxx, xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, TO(_BL),          KC__VOLUP, \
@@ -159,6 +176,16 @@ void matrix_scan_user(void) {
     led_shift = false;
     LayerLEDSet(layer);
   }
+}
+
+void leader_start(void) {
+  enable_rgb();
+  rgblight_setrgb(255, 255, 255);
+}
+
+void leader_end(void) {
+  disable_rgb();
+  rgblight_setrgb(0, 0, 0);
 }
 
 bool forced_ctl_tab = false;
