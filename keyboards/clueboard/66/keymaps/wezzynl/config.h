@@ -5,9 +5,6 @@
 
 #define PREVENT_STUCK_MODIFIERS
 
-#undef MOUSEKEY_MAX_SPEED
-#define MOUSEKEY_MAX_SPEED 6
-
 #undef COMBO_COUNT
 #define COMBO_COUNT 4
 
@@ -17,5 +14,9 @@
 
 // Set Combined mode for mouse keys
 #define MK_COMBINED
+#define MOUSEKEY_DELAY 100
+#define MOUSEKEY_INTERVAL 16
+#define MOUSEKEY_TIME_TO_MAX 20
+#define MOUSEKEY_MAX_SPEED 16
 
 #endif
