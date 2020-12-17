@@ -70,10 +70,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   // Super Duper
   [_SD] = KEYMAP(
-                 xxxxxxx,       xxxxxxx, xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,          RGB_VAI, \
-                 LCTL(KC_TAB),  _______, xxxxxxx,xxxxxxx,KC_R   ,xxxxxxx,xxxxxxx,LGUI(KC_C),LSFT(LGUI(KC_LBRC)),LSFT(LGUI(KC_RBRC)), xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,                   RGB_VAD, \
-                 KC_ESCAPE,     KC_LALT, _______,_______,KC_LGUI,KC_BSPC,KC_LEFT,KC_DOWN,KC_UP, KC_RIGHT, KC_F19, xxxxxxx, xxxxxxx, _______, \
-                 _______,       _______, xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx, LGUI(KC_V),KC_ENT,KC_BSPC,LGUI(KC_X), xxxxxxx, xxxxxxx,          MO(_FL), RGB_SAI, \
+                 xxxxxxx,       xxxxxxx, xxxxxxx,xxxxxxx,KC_4,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx, LALT(KC_UP), xxxxxxx, xxxxxxx, xxxxxxx, _______,          RGB_VAI, \
+                 LCTL(KC_TAB),  xxxxxxx, LALT(KC_RIGHT), xxxxxxx,KC_R   ,xxxxxxx,xxxxxxx,KC_PGUP,LSFT(LGUI(KC_LBRC)),LSFT(LGUI(KC_RBRC)), xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,                   RGB_VAD, \
+                 KC_ESCAPE,     KC_LALT, _______,KC_PGDOWN, KC_LGUI,KC_BSPC,KC_LEFT,KC_DOWN,KC_UP, KC_RIGHT, KC_F19, xxxxxxx, xxxxxxx, _______, \
+                 KC_LSFT,       _______, xxxxxxx,xxxxxxx,xxxxxxx, xxxxxxx, LALT(KC_LEFT), LGUI(KC_V),KC_ENT,KC_BSPC,LGUI(KC_X), xxxxxxx, xxxxxxx,          MO(_FL), RGB_SAI, \
                  _______,       _______, _______,KC_LSFT,        KC_ENT ,   KC_LALT,           KC_F19 , xxxxxxx, _______, MO(_FL), RGB_HUD, RGB_SAD, RGB_HUI),
 
   // Control tab layer
@@ -205,6 +205,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // to the console when releasing control as MOD_LCTL
     // uprintf("%u", MOD_LCTL);
     switch (keycode) {
+      case KC_4:
+        if(!record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LSFT) ) {
+          unregister_code(KC_LSFT);
+          register_code(KC_LALT);
+          register_code(KC_DOWN);
+          unregister_code(KC_DOWN);
+          unregister_code(KC_LALT);
+          return false;
+        }
+      return false;
+
       case 24873:
         if(!record->event.pressed && forced_super_duper && keycode == 24873 && sticky_super_duper == false) {
           forced_super_duper = false;
