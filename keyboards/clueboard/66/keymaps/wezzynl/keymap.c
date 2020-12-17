@@ -1,3 +1,5 @@
+// #include "print.h"
+
 #include QMK_KEYBOARD_H
 
 // Helpful defines for a bit more readability in the keymaps
@@ -14,7 +16,6 @@
 #define _PL 3 // Programming layer
 #define _SD 4 // SuperDuper layer
 #define _CTL 5 // Control Tab layer
-#define _ML 6 // Mouse layer
 #define _GL 7 // GOD layer should always be at top so we're always able to switch to it.
 
 // These are called with `FUNC(x)` where `x` is the index.
@@ -37,9 +38,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BL] = KEYMAP(
                  KC_GRAVE,         KC_1,   KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,    KC_0,     KC_MINS,  KC_EQL,   KC_GRV,  KC_BSPC,          KC_PGUP, \
                  KC_TAB,   KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,    KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,                   KC_PGDOWN, \
-                 FUNC(0),  KC_A,   KC_S,   KC_D,   KC_F,           KC_G,   KC_H,   KC_J,   KC_K,   KC_L,    KC_SCLN,  KC_QUOT,  KC_NUHS,  KC_ENT, \
+                 MT(MOD_LCTL, KC_ESCAPE),  KC_A,   KC_S,   KC_D,   KC_F,           KC_G,   KC_H,   KC_J,   KC_K,   KC_L,    KC_SCLN,  KC_QUOT,  KC_NUHS,  KC_ENT, \
                  KC_LSFT, KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,           KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,   KC_SLSH,  KC_RSFT,  MO(_FL),          KC_UP,            \
-                 TT(_ML), MO(_GL), KC_LALT,KC_LGUI,        KC_ENT, KC_SPC,                         MO(_FL), KC_RGUI,  MO(_PL), KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT),
+                 TT(_SD), MO(_GL), KC_LALT,KC_LGUI,        KC_ENT, KC_SPC,                         MO(_FL), KC_RGUI,  MO(_PL), KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT),
 
   /* Keymap _FL: Function Layer
    */
@@ -70,10 +71,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Super Duper
   [_SD] = KEYMAP(
                  xxxxxxx,       xxxxxxx, xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, _______,          RGB_VAI, \
-                 LCTL(KC_TAB),  xxxxxxx, xxxxxxx,xxxxxxx,KC_R   ,xxxxxxx,xxxxxxx,LGUI(KC_C),LSFT(LGUI(KC_LBRC)),LSFT(LGUI(KC_RBRC)), xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,                   RGB_VAD, \
-                 FUNC(0),       KC_LALT, _______,_______,KC_LGUI,KC_BSPC,KC_LEFT,KC_DOWN,KC_UP, KC_RIGHT, KC_BSPC, xxxxxxx, xxxxxxx, _______, \
+                 LCTL(KC_TAB),  _______, xxxxxxx,xxxxxxx,KC_R   ,xxxxxxx,xxxxxxx,LGUI(KC_C),LSFT(LGUI(KC_LBRC)),LSFT(LGUI(KC_RBRC)), xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,                   RGB_VAD, \
+                 KC_ESCAPE,     KC_LALT, _______,_______,KC_LGUI,KC_BSPC,KC_LEFT,KC_DOWN,KC_UP, KC_RIGHT, KC_F19, xxxxxxx, xxxxxxx, _______, \
                  _______,       _______, xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx, LGUI(KC_V),KC_ENT,KC_BSPC,LGUI(KC_X), xxxxxxx, xxxxxxx,          MO(_FL), RGB_SAI, \
-                 _______,       _______, _______,KC_LSFT,        KC_ENT ,   KC_SPC,           KC_F19 , xxxxxxx, _______, MO(_FL), RGB_HUD, RGB_SAD, RGB_HUI),
+                 _______,       _______, _______,KC_LSFT,        KC_ENT ,   KC_LALT,           KC_F19 , xxxxxxx, _______, MO(_FL), RGB_HUD, RGB_SAD, RGB_HUI),
 
   // Control tab layer
   [_CTL] = KEYMAP(
@@ -83,13 +84,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_LSFT, KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,           KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,   KC_SLSH,  KC_RSFT,  MO(_FL),          KC_UP,            \
                  MO(_PL), MO(_GL), KC_LCTL,KC_LGUI,        KC_ENT, KC_SPC,                         MO(_FL), KC_RGUI,  MO(_PL), KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT),
 
-  // Mouse layer
-  [_ML] = KEYMAP(
-                 _______, _______, _______, _______, _______, _______, _______,    _______,    _______,  _______, _______,  _______,  _______, _______, _______,          _______, \
-                 _______, _______, _______, _______, _______, _______, _______,    _______,    _______,  _______, _______,  _______,  _______, _______,                   _______, \
-                 _______, KC_MS_ACCEL0, _______, KC_MS_BTN2, KC_MS_ACCEL1, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_UP, KC_MS_RIGHT, _______,  _______,  _______, _______,                            \
-                 _______, _______, _______, _______, _______, _______, _______,    _______,    _______,  _______, _______,  _______,  _______, _______, _______,                   \
-                 _______, _______, _______, KC_MS_ACCEL0,          KC_MS_BTN1, KC_MS_BTN2,                          _______, _______,  _______,  _______, _______, _______, _______),
   // GOD layer
   [_GL] = KEYMAP(
                  xxxxxxx,       xxxxxxx, xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx, TO(_BL),          KC__VOLUP, \
@@ -189,8 +183,11 @@ void leader_end(void) {
 }
 
 bool forced_ctl_tab = false;
+bool forced_super_duper = false;
+bool sticky_super_duper = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  // uprintf("KL: kc: %u, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
   uint8_t layer = biton32(layer_state);
   if (layer == _CTL) {
     switch (keycode) {
@@ -202,8 +199,48 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     }
   }
+
+  if (layer ==_SD) {
+    // Not sure what keycode 24873 is but it's what I found when printing keycode
+    // to the console when releasing control as MOD_LCTL
+    // uprintf("%u", MOD_LCTL);
+    switch (keycode) {
+      case 24873:
+        if(!record->event.pressed && forced_super_duper && keycode == 24873 && sticky_super_duper == false) {
+          forced_super_duper = false;
+          layer_off(_SD);
+          return false;
+        }
+        return true;
+
+      case KC_ESCAPE:
+        if(record->event.pressed) {
+          forced_super_duper = false;
+          sticky_super_duper = false;
+          layer_off(_SD);
+        }
+        return false;
+
+      case KC_R:
+        if(record->event.pressed) {
+          if (sticky_super_duper) {
+            forced_super_duper = false;
+            sticky_super_duper = false;
+            layer_off(_SD);
+          } else {
+            sticky_super_duper = true;
+          }
+        }
+        return false;
+      default:
+        return true;
+    }
+  }
+
   if (layer != _BL) { return true; }
+
   switch (keycode) {
+    // Alt tab movements
     case KC_TAB:
       if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LALT) && forced_ctl_tab == false) {
         forced_ctl_tab = true;
@@ -215,19 +252,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
       return true;
-  case KC_GRAVE:
-    if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LALT) && forced_ctl_tab == false) {
-      forced_ctl_tab = true;
-      clear_mods();
-      register_code(KC_LCTL);
-      layer_on(_CTL);
-      register_code(KC_LSFT);
-      register_code(KC_TAB);
-      unregister_code(KC_TAB);
-      unregister_code(KC_LSFT);
-      return false;
-    }
-    return true;
+    case KC_GRAVE:
+      if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LALT) && forced_ctl_tab == false) {
+        forced_ctl_tab = true;
+        clear_mods();
+        register_code(KC_LCTL);
+        layer_on(_CTL);
+        register_code(KC_LSFT);
+        register_code(KC_TAB);
+        unregister_code(KC_TAB);
+        unregister_code(KC_LSFT);
+        return false;
+      }
+      return true;
+
+    case KC_SCLN:
+      if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LCTL) && forced_super_duper == false) {
+        forced_super_duper = true;
+        layer_on(_SD);
+        clear_mods();
+        return false;
+      }
+      return true;
+
     default:
       return true;
   }
