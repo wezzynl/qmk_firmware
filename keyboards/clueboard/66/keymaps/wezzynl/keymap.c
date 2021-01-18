@@ -70,8 +70,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   // Super Duper
   [_SD] = KEYMAP(
-                 xxxxxxx,       xxxxxxx, xxxxxxx,xxxxxxx,KC_4,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx, LALT(KC_UP), xxxxxxx, xxxxxxx, xxxxxxx, _______,          RGB_VAI, \
-                 LCTL(KC_TAB),  xxxxxxx, LALT(KC_RIGHT), xxxxxxx,KC_R   ,xxxxxxx,xxxxxxx,KC_PGUP,LSFT(LGUI(KC_LBRC)),LSFT(LGUI(KC_RBRC)), xxxxxxx, xxxxxxx, xxxxxxx, xxxxxxx,                   RGB_VAD, \
+                 xxxxxxx,       xxxxxxx, xxxxxxx,xxxxxxx,LCTL(KC_E),xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx,xxxxxxx, LCTL(KC_A), xxxxxxx, xxxxxxx, xxxxxxx, _______,          RGB_VAI, \
+                 LCTL(KC_TAB),  xxxxxxx, LALT(KC_RIGHT), xxxxxxx,KC_R   ,xxxxxxx,xxxxxxx,KC_PGUP,LSFT(LGUI(KC_LBRC)),LSFT(LGUI(KC_RBRC)), xxxxxxx, KC_LBRC, xxxxxxx, xxxxxxx,                   RGB_VAD, \
                  KC_ESCAPE,     KC_LALT, _______,KC_PGDOWN, KC_LGUI,KC_BSPC,KC_LEFT,KC_DOWN,KC_UP, KC_RIGHT, KC_F19, xxxxxxx, xxxxxxx, _______, \
                  KC_LSFT,       _______, xxxxxxx,xxxxxxx,xxxxxxx, xxxxxxx, LALT(KC_LEFT), LGUI(KC_V),KC_ENT,KC_BSPC,LGUI(KC_X), xxxxxxx, xxxxxxx,          MO(_FL), RGB_SAI, \
                  _______,       _______, _______,KC_LSFT,        KC_ENT ,   KC_LALT,           KC_F19 , xxxxxxx, _______, MO(_FL), RGB_HUD, RGB_SAD, RGB_HUI),
@@ -232,7 +232,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
 
-      case KC_R:
+      case KC_LBRC:
         if(record->event.pressed) {
           if (sticky_super_duper) {
             forced_super_duper = false;
