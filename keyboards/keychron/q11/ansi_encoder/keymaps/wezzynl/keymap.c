@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SD] = LAYOUT_91_ansi(
         KC_MUTE,  KC_ESC,                   KC_BRID,  KC_BRIU,         KC_MCTL,  KC_LPAD,  RM_VALD,   RM_VALU,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  KC_INS,   KC_DEL,   KC_MUTE,
         _______,  KC_GRV,                   xxxx,     xxxx,            xxxx,     KC_END,   xxxx,      xxxx,     xxxx,        xxxx,                 xxxx,                 KC_HOME,  xxxxxx,     xxxxxx,   KC_BSPC, KC_PGUP,
-        _______,  LCTL(KC_TAB),             xxxx,     LCTL(KC_RIGHT),  xxxx,     KC_R,     xxxx,      xxxx,     KC_PGUP,     LSFT(LGUI(KC_LBRC)),  LSFT(LGUI(KC_RBRC)),  xxxx,     xxxxxx,     xxxxxx,   xxxxxx,  KC_PGDN,
+        _______,  LCTL(KC_TAB),             xxxx,     LCTL(KC_RIGHT),  xxxx,     KC_R,     xxxx,      xxxx,     KC_PGUP,     LSFT(LGUI(KC_LBRC)),  LSFT(LGUI(KC_RBRC)),  xxxx,     KC_LBRC,    xxxxxx,   xxxxxx,  KC_PGDN,
         _______,  KC_ESC,                   KC_A,     xxxx,            KC_PGDN,  KC_F,     KC_BSPC,   KC_LEFT,  KC_DOWN,     KC_UP,                KC_RIGHT,             KC_F19,   xxxxxx,               KC_ENT,   _______,
         _______,  KC_LSFT,                  KC_Z,     KC_X,            KC_C,     KC_V,     KC_B,      KC_N,     KC_M,        KC_COMM,              KC_DOT,               KC_SLSH,              KC_RSFT,  KC_UP,
         _______,  KC_LCTL,                  KC_LOPT,  MO(MAC_FN),      KC_LCMD,  KC_ENT,                                     KC_SPC,               KC_RCMD,              MO(MAC_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
