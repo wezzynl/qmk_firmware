@@ -139,6 +139,47 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         break;
     }
 
+  if (layer == MAC_BASE) {
+    switch (keycode) {
+      case KC_C:
+        if (record->event.pressed && get_mods() == MOD_BIT(KC_LCMD)) {
+            unregister_code(KC_LCMD);
+            register_code(KC_COPY);
+            unregister_code(KC_COPY);
+            register_code(KC_LCMD);
+            return false;
+            break;
+        }
+      case KC_V:
+        if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LCMD)) {
+            unregister_code(KC_LCMD);
+            register_code(KC_PASTE);
+            unregister_code(KC_PASTE);
+            register_code(KC_LCMD);
+            return false;
+            break;
+        }
+      case KC_X:
+        if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LCMD)) {
+            unregister_code(KC_LCMD);
+            register_code(KC_CUT);
+            unregister_code(KC_PASTE);
+            register_code(KC_LCMD);
+            return false;
+            break;
+        }
+      case KC_Z:
+        if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LCMD)) {
+            unregister_code(KC_LCMD);
+            register_code(KC_UNDO);
+            unregister_code(KC_PASTE);
+            register_code(KC_LCMD);
+            return false;
+            break;
+        }
+    }
+  }
+
   if (layer == CTL) {
     switch (keycode) {
     case KC_LALT:
