@@ -16,6 +16,8 @@
 #define TAPPING_FORCE_HOLD
 #define TAPPING_TERM 200
 #define COMBO_TERM 8
+#define HOLD_ON_OTHER_KEY_PRESS
+#define QUICK_TAP_TERM 0
 
 // Set Combined mode for mouse keys
 #define MK_COMBINED
