@@ -194,6 +194,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (layer == SD) {
     // Not sure what keycode RELEASE_CTRL_SEMI is but it's what I found when printing keycode
     // to the console when releasing control as MOD_LCTL (going back from ctrl-semi/SD)
+    // Cmd + h/j/k/l => Home/PgDn/PgUp/End
+    if (get_mods() & MOD_MASK_GUI) {
+      uint16_t big = KC_NO;
+      switch (keymap_key_to_keycode(MAC_BASE, record->event.key)) {
+        case KC_H: big = KC_HOME; break;
+        case KC_J: big = KC_PGDN; break;
+        case KC_K: big = KC_PGUP; break;
+        case KC_L: big = KC_END;  break;
+      }
+      if (big != KC_NO) {
+        if (record->event.pressed) {
+          uint8_t gui = get_mods() & MOD_MASK_GUI;
+          unregister_mods(gui);
+          tap_code(big);
+          register_mods(gui);
+        }
+        return false;
+      }
+    }
+
     switch (keycode) {
       case KC_4:
         if(!record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LSFT) ) {
