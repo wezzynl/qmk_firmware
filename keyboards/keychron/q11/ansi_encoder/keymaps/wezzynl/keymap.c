@@ -151,7 +151,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         }
       case KC_V:
-        if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LCMD)) {
+        if (record->event.pressed && get_mods() & MOD_BIT(KC_LCMD)) {
             unregister_code(KC_LCMD);
             register_code(KC_PASTE);
             unregister_code(KC_PASTE);
@@ -160,7 +160,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         }
       case KC_X:
-        if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LCMD)) {
+        if (record->event.pressed && get_mods() & MOD_BIT(KC_LCMD)) {
             unregister_code(KC_LCMD);
             register_code(KC_CUT);
             unregister_code(KC_PASTE);
@@ -169,7 +169,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         }
       case KC_Z:
-        if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LCMD)) {
+        if (record->event.pressed && get_mods() & MOD_BIT(KC_LCMD)) {
             unregister_code(KC_LCMD);
             register_code(KC_UNDO);
             unregister_code(KC_PASTE);
@@ -216,7 +216,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     switch (keycode) {
       case KC_4:
-        if(!record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LSFT) ) {
+        if(!record->event.pressed && get_mods() & MOD_BIT(KC_LSFT) ) {
           unregister_code(KC_LSFT);
           register_code(KC_LALT);
           register_code(KC_DOWN);
@@ -263,7 +263,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // Tab prev/next
     case KC_I:
-      if(record->event.pressed && (keyboard_report->mods & MOD_MASK_SHIFT) && (keyboard_report->mods & MOD_MASK_GUI)) {
+      if(record->event.pressed && (get_mods() & MOD_MASK_SHIFT) && (get_mods() & MOD_MASK_GUI)) {
         clear_mods();
         register_code(KC_LCTL);
         register_code(KC_PGUP);
@@ -275,7 +275,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
     case KC_O:
-      if(record->event.pressed && (keyboard_report->mods & MOD_MASK_SHIFT) && (keyboard_report->mods & MOD_MASK_GUI)) {
+      if(record->event.pressed && (get_mods() & MOD_MASK_SHIFT) && (get_mods() & MOD_MASK_GUI)) {
         clear_mods();
         register_code(KC_LCTL);
         register_code(KC_PGDN);
@@ -288,7 +288,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     // Alt tab movements
     case KC_TAB:
-      if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LALT) && forced_ctl_tab == false) {
+      if (record->event.pressed && get_mods() & MOD_BIT(KC_LALT) && forced_ctl_tab == false) {
         forced_ctl_tab = true;
         clear_mods();
         register_code(KC_LCTL);
@@ -299,7 +299,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
     case KC_GRAVE:
-      if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LALT) && forced_ctl_tab == false) {
+      if (record->event.pressed && get_mods() & MOD_BIT(KC_LALT) && forced_ctl_tab == false) {
         forced_ctl_tab = true;
         clear_mods();
         register_code(KC_LCTL);
@@ -313,7 +313,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return true;
 
     case KC_SCLN:
-      if (record->event.pressed && keyboard_report->mods & MOD_BIT(KC_LCTL) && forced_super_duper == false) {
+      if (record->event.pressed && get_mods() & MOD_BIT(KC_LCTL) && forced_super_duper == false) {
         forced_super_duper = true;
         sd_layer_on();
         clear_mods();
